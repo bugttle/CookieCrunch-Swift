@@ -10,31 +10,34 @@ let NumColumns = 9
 let NumRows = 9
 
 class Level {
-    let cookies = Array2D<Cookie>(columns: NumColumns, rows: NumRows)
-    let tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows)
+    fileprivate var cookies = Array2D<Cookie>(columns: NumColumns, rows: NumRows)
+    private var tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows)
     
     init(filename: String) {
-        if let dictionary = Dictionary<String, AnyObject>.loadJSONFromBundle(filename) {
-            if let tilesArray: AnyObject = dictionary["tiles"] {
-                for (row, rowArray) in enumerate(tilesArray as [[Int]]) {
-                    let tileRow = NumRows - row - 1
-                    for (column, value) in enumerate(rowArray) {
-                        if value == 1 {
-                            tiles[column, tileRow] = Tile()
-                        }
-                    }
+        // 1
+        guard let dictionary = Dictionary<String, AnyObject>.loadJSONFromBundle(filename: filename) else { return }
+        // 2
+        guard let tilesArray = dictionary["tiles"] as? [[Int]] else { return }
+        // 3
+        for (row, rowArray) in tilesArray.enumerated() {
+            // 4
+            let tileRow = NumRows - row - 1
+            // 5
+            for (column, value) in rowArray.enumerated() {
+                if value == 1 {
+                    tiles[column, tileRow] = Tile()
                 }
             }
         }
     }
     
-    func cookieAtColumn(column: Int, row: Int) -> Cookie? {
+    func cookieAt(column: Int, row: Int) -> Cookie? {
         assert(column >= 0 && column < NumColumns)
         assert(row >= 0 && row < NumRows)
         return cookies[column, row]
     }
     
-    func tileAtColumn(column: Int, row: Int) -> Tile? {
+    func tileAt(column: Int, row: Int) -> Tile? {
         assert(column >= 0 && column < NumColumns)
         assert(row >= 0 && row < NumRows)
         return tiles[column, row]
@@ -44,17 +47,23 @@ class Level {
         return createInitialCookies()
     }
     
-    func createInitialCookies() -> Set<Cookie> {
+    private func createInitialCookies() -> Set<Cookie> {
         var set = Set<Cookie>()
         
+        // 1
         for row in 0..<NumRows {
             for column in 0..<NumColumns {
-                if tiles[column, row] {
+                
+                if tiles[column, row] != nil {
+                    // 2
                     var cookieType = CookieType.random()
+                    
+                    // 3
                     let cookie = Cookie(column: column, row: row, cookieType: cookieType)
                     cookies[column, row] = cookie
                     
-                    set.addElement(cookie)
+                    // 4
+                    set.insert(cookie)
                 }
             }
         }

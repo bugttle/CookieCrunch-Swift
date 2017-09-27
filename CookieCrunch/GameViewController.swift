@@ -18,28 +18,28 @@ class GameViewController: UIViewController {
         // Release any cached data, images, etc that aren't in use.
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.AllButUpsideDown.toRaw())
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return [.portrait, .portraitUpsideDown]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Configure the view.
-        let skView = view as SKView
-        skView.multipleTouchEnabled = false
+        let skView = view as! SKView
+        skView.isMultipleTouchEnabled = false
         
         // Create and configure the scene.
         scene = GameScene(size: skView.bounds.size)
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .aspectFill
         
         level = Level(filename: "Level_1")
         scene.level = level
@@ -58,6 +58,6 @@ class GameViewController: UIViewController {
     
     func shuffle() {
         let newCookies = level.shuffle()
-        scene.addSpritesForCookies(newCookies)
+        scene.addSprites(for: newCookies)
     }
 }

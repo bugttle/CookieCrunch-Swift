@@ -6,6 +6,5 @@
 //  Copyright (c) 2014 UQ Times. All rights reserved.
 //
 
-class Tile {
-    
+class Tile {    
 }
