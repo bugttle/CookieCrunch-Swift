@@ -1,6 +1,6 @@
 //
-//  CookieCrunchSwiftTests.swift
-//  CookieCrunchSwiftTests
+//  CookieCrunchTests.swift
+//  CookieCrunchTests
 //
 //  Created by UQ Times on 7/18/14.
 //  Copyright (c) 2014 UQ Times. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 
-class CookieCrunchSwiftTests: XCTestCase {
+class CookieCrunchTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
