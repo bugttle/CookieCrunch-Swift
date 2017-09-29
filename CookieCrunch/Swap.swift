@@ -6,7 +6,7 @@
 //  Copyright © 2017年 UQ Times. All rights reserved.
 //
 
-struct Swap: CustomStringConvertible {
+struct Swap: CustomStringConvertible, Hashable {
     let cookieA: Cookie
     let cookieB: Cookie
     
@@ -18,4 +18,13 @@ struct Swap: CustomStringConvertible {
     var description: String {
         return "swap \(cookieA) with \(cookieB)"
     }
+    
+    var hashValue: Int {
+        return cookieA.hashValue ^ cookieB.hashValue
+    }
+}
+
+func ==(lhs: Swap, rhs: Swap) -> Bool {
+    return (lhs.cookieA == rhs.cookieA && lhs.cookieB == rhs.cookieB) ||
+        (lhs.cookieB == rhs.cookieA && lhs.cookieA == rhs.cookieB)
 }
