@@ -12,6 +12,7 @@ class GameScene: SKScene {
     var level: Level!
     private var swipeFromColumn: Int?
     private var swipeFromRow: Int?
+    var swipeHandler: ((Swap) -> ())?
     
     let TileWidth: CGFloat = 32.0
     let TileHeight: CGFloat = 36.0
@@ -153,9 +154,29 @@ class GameScene: SKScene {
         guard toRow >= 0 && toRow < NumRows else { return }
         // 3
         if let toCookie = level.cookieAt(column: toColumn, row: toRow),
-            let fromCookie = level.cookieAt(column: swipeFromColumn!, row: swipeFromRow!) {
+            let fromCookie = level.cookieAt(column: swipeFromColumn!, row: swipeFromRow!),
             // 4
-            print("*** swapping \(fromCookie) with \(toCookie)")
+            let handler = swipeHandler {
+            let swap = Swap(cookieA: fromCookie, cookieB: toCookie)
+            handler(swap)
         }
+    }
+    
+    func animate(_ swap: Swap, completion: @escaping() -> ()) {
+        let spriteA = swap.cookieA.sprite!
+        let spriteB = swap.cookieB.sprite!
+        
+        spriteA.zPosition = 100
+        spriteB.zPosition = 90
+        
+        let duration: TimeInterval = 0.3
+        
+        let moveA = SKAction.move(to: spriteB.position, duration: duration)
+        moveA.timingMode = .easeOut
+        spriteA.run(moveA, completion: completion)
+        
+        let moveB = SKAction.move(to: spriteA.position, duration: duration)
+        moveB.timingMode = .easeOut
+        spriteB.run(moveB)
     }
 }
