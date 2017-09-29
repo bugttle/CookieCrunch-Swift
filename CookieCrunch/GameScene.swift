@@ -20,6 +20,7 @@ class GameScene: SKScene {
     let gameLayer = SKNode()
     let cookiesLayer = SKNode()
     let tilesLayer = SKNode()
+    var selectionSprite = SKSpriteNode()
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder) is not used in this app")
@@ -48,7 +49,7 @@ class GameScene: SKScene {
         cookiesLayer.position = layerPosition
         gameLayer.addChild(cookiesLayer)
     }
-
+    
     func addSprites(for cookies: Set<Cookie>) {
         for cookie in cookies {
             let sprite = SKSpriteNode(imageNamed: cookie.cookieType.spriteName)
@@ -90,6 +91,8 @@ class GameScene: SKScene {
                 // 4
                 swipeFromColumn = column
                 swipeFromRow = row
+                
+                showSelectionIndicator(for: cookie)
             }
         }
     }
@@ -123,6 +126,8 @@ class GameScene: SKScene {
                 
                 // 5
                 swipeFromColumn = nil
+                
+                hideSelectionIndicator()
             }
         }
     }
@@ -130,6 +135,10 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         swipeFromColumn = nil
         swipeFromRow = nil
+        
+        if selectionSprite.parent != nil && swipeFromColumn != nil {
+            hideSelectionIndicator()
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -178,5 +187,26 @@ class GameScene: SKScene {
         let moveB = SKAction.move(to: spriteA.position, duration: duration)
         moveB.timingMode = .easeOut
         spriteB.run(moveB)
+    }
+    
+    func showSelectionIndicator(for cookie: Cookie) {
+        if selectionSprite.parent != nil {
+            selectionSprite.removeFromParent()
+        }
+        
+        if let sprite = cookie.sprite {
+            let texture = SKTexture(imageNamed: cookie.cookieType.highlightedSpriteName)
+            selectionSprite.size = CGSize(width: TileWidth, height: TileHeight)
+            selectionSprite.run(SKAction.setTexture(texture))
+            
+            sprite.addChild(selectionSprite)
+            selectionSprite.alpha = 1.0
+        }
+    }
+    
+    func hideSelectionIndicator() {
+        selectionSprite.run(SKAction.sequence([
+            SKAction.fadeOut(withDuration: 0.3),
+            SKAction.removeFromParent()]))
     }
 }
