@@ -218,6 +218,22 @@ class GameScene: SKScene {
         run(invalidSwapSound)
     }
     
+    func animateMatchedCookies(for chains: Set<Chain>, completion: @escaping () -> ()) {
+        for chain in chains {
+            for cookie in chain.cookies {
+                if let sprite = cookie.sprite {
+                    if sprite.action(forKey: "removing") == nil {
+                        let scaleAction = SKAction.scale(to: 0.1, duration: 0.3)
+                        scaleAction.timingMode = .easeOut
+                        sprite.run(SKAction.sequence([scaleAction, SKAction.removeFromParent()]),
+                                   withKey:"removing")
+                    }
+                }
+            }
+        }
+        run(matchSound)
+        run(SKAction.wait(forDuration: 0.3), completion: completion)
+    }    
     
     func showSelectionIndicator(for cookie: Cookie) {
         if selectionSprite.parent != nil {
