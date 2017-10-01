@@ -15,6 +15,7 @@ class Level {
     private var possibleSwaps = Set<Swap>()
     var targetScore = 0
     var maximumMoves = 0
+    private var comboMultiplier = 0
     
     init(filename: String) {
         // 1
@@ -347,7 +348,12 @@ class Level {
     private func calculateScores(for chains: Set<Chain>) {
         // 3-Chain is 60 pts, 4-chain is 120, 5-chain is 180, and so on
         for chain in chains {
-            chain.score = 60 * (chain.length - 2)
+            chain.score = 60 * (chain.length - 2) * comboMultiplier
+            comboMultiplier += 1
         }
+    }
+    
+    func resetComboMultiplier() {
+        comboMultiplier = 1
     }
 }
