@@ -43,6 +43,7 @@ class GameScene: SKScene {
         background.size = size
         addChild(background)
         
+        gameLayer.isHidden = true
         addChild(gameLayer)
         
         let layerPosition = CGPoint(
@@ -238,7 +239,7 @@ class GameScene: SKScene {
         }
         run(matchSound)
         run(SKAction.wait(forDuration: 0.3), completion: completion)
-    }    
+    }
     
     func animateFallingCookies(columns: [[Cookie]], completion: @escaping () -> ()) {
         // 1
@@ -327,6 +328,20 @@ class GameScene: SKScene {
         scoreLabel.run(SKAction.sequence([moveAction, SKAction.removeFromParent()]))
     }
     
+    func animateGameOver(_ completion: @escaping () -> ()) {
+        let action = SKAction.move(by: CGVector(dx: 0, dy: -size.height), duration: 0.3)
+        action.timingMode = .easeIn
+        gameLayer.run(action, completion: completion)
+    }
+    
+    func animateBeginGame(_ completion: @escaping () -> ()) {
+        gameLayer.isHidden = false
+        gameLayer.position = CGPoint(x: 0, y: size.height)
+        let action = SKAction.move(by: CGVector(dx: 0, dy: -size.height), duration: 0.3)
+        action.timingMode = .easeOut
+        gameLayer.run(action, completion: completion)
+    }
+    
     func showSelectionIndicator(for cookie: Cookie) {
         if selectionSprite.parent != nil {
             selectionSprite.removeFromParent()
@@ -346,5 +361,9 @@ class GameScene: SKScene {
         selectionSprite.run(SKAction.sequence([
             SKAction.fadeOut(withDuration: 0.3),
             SKAction.removeFromParent()]))
+    }
+    
+    func removeAllCookieSprites() {
+        cookiesLayer.removeAllChildren()
     }
 }
