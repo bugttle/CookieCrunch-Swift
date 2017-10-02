@@ -15,6 +15,7 @@
 		4D75F8A41F7B9D9300A91A05 /* Mining by Moonlight.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4D75F89E1F7B9D9300A91A05 /* Mining by Moonlight.mp3 */; };
 		4D75F8A51F7B9D9300A91A05 /* Scrape.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4D75F89F1F7B9D9300A91A05 /* Scrape.wav */; };
 		4D75F8A71F7B9F0F00A91A05 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D75F8A61F7B9F0F00A91A05 /* Chain.swift */; };
+		4DE6A68F1F7CA324004B08AD /* Grid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4DE6A68E1F7CA324004B08AD /* Grid.atlas */; };
 		CE7953271978271800B0B500 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7953261978271800B0B500 /* AppDelegate.swift */; };
 		CE79532B1978271800B0B500 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE79532A1978271800B0B500 /* GameScene.swift */; };
 		CE79532D1978271800B0B500 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE79532C1978271800B0B500 /* GameViewController.swift */; };
@@ -53,6 +54,7 @@
 		4D75F89E1F7B9D9300A91A05 /* Mining by Moonlight.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mining by Moonlight.mp3"; sourceTree = "<group>"; };
 		4D75F89F1F7B9D9300A91A05 /* Scrape.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Scrape.wav; sourceTree = "<group>"; };
 		4D75F8A61F7B9F0F00A91A05 /* Chain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chain.swift; sourceTree = "<group>"; };
+		4DE6A68E1F7CA324004B08AD /* Grid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Grid.atlas; sourceTree = "<group>"; };
 		CE7953211978271800B0B500 /* CookieCrunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookieCrunch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7953251978271800B0B500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE7953261978271800B0B500 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				CE79532E1978271800B0B500 /* Main.storyboard */,
 				CE7953311978271800B0B500 /* Images.xcassets */,
 				CE7953471978288E00B0B500 /* Sprites.atlas */,
+				4DE6A68E1F7CA324004B08AD /* Grid.atlas */,
 				4D75F8991F7B9D9300A91A05 /* Sounds */,
 				CE7953511978321B00B0B500 /* Levels */,
 				CE7953241978271800B0B500 /* Supporting Files */,
@@ -280,6 +283,7 @@
 				CE7953301978271800B0B500 /* Main.storyboard in Resources */,
 				CE7953571978321B00B0B500 /* Level_0.json in Resources */,
 				4D75F8A01F7B9D9300A91A05 /* Chomp.wav in Resources */,
+				4DE6A68F1F7CA324004B08AD /* Grid.atlas in Resources */,
 				CE79535B1978321B00B0B500 /* Level_4.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
