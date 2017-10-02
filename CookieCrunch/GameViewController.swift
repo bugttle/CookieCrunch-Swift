@@ -17,6 +17,8 @@ class GameViewController: UIViewController {
     var movesLeft = 0
     var score = 0
     
+    var currentLevelNum = 1
+    
     @IBOutlet weak var targetLabel: UILabel!
     @IBOutlet weak var movesLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -58,7 +60,13 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Configure the view.
+        // Setup view with level 1
+        setupLevel(currentLevelNum)
+        
+        backgroundMusic?.play()
+    }
+    
+    func setupLevel(_ levelNum: Int) {
         let skView = view as! SKView
         skView.isMultipleTouchEnabled = false
         
@@ -66,18 +74,17 @@ class GameViewController: UIViewController {
         scene = GameScene(size: skView.bounds.size)
         scene.scaleMode = .aspectFill
         
-        level = Level(filename: "Level_1")
+        level = Level(filename: "Level_\(levelNum)")
         scene.level = level
         
         scene.addTiles()
-        
         scene.swipeHandler = handleSwipe
+        
         gameOverPanel.isHidden = true
+        shuffleButton.isHidden = true
         
         // Present the scene.
         skView.presentScene(scene)
-        
-        backgroundMusic?.play()
         
         beginGame()
     }
@@ -158,6 +165,7 @@ class GameViewController: UIViewController {
         
         if score >= level.targetScore {
             gameOverPanel.image = UIImage(named: "LevelComplete")
+            currentLevelNum = currentLevelNum < NumLevels ? currentLevelNum+1 : 1
             showGameOver()
         } else if movesLeft == 0 {
             gameOverPanel.image = UIImage(named: "GameOver")
@@ -183,7 +191,7 @@ class GameViewController: UIViewController {
         gameOverPanel.isHidden = true
         scene.isUserInteractionEnabled = true
         
-        beginGame()
+        setupLevel(currentLevelNum)
     }
     
     @IBAction func shuffleButtonPressed(_: AnyObject) {

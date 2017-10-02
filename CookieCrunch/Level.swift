@@ -8,6 +8,7 @@
 
 let NumColumns = 9
 let NumRows = 9
+let NumLevels = 4 // Excluding level 0
 
 class Level {
     fileprivate var cookies = Array2D<Cookie>(columns: NumColumns, rows: NumRows)
