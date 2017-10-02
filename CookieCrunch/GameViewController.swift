@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 class GameViewController: UIViewController {
     var scene: GameScene!
@@ -23,6 +24,19 @@ class GameViewController: UIViewController {
     @IBOutlet weak var shuffleButton: UIButton!
     
     var tapGestureRecognizer: UITapGestureRecognizer!
+    
+    lazy var backgroundMusic: AVAudioPlayer? = {
+        guard let url = Bundle.main.url(forResource: "Mining by Moonlight", withExtension: "mp3") else {
+            return nil
+        }
+        do {
+            let player = try AVAudioPlayer(contentsOf: url)
+            player.numberOfLoops = -1
+            return player
+        } catch {
+            return nil
+        }
+    }()
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -62,6 +76,8 @@ class GameViewController: UIViewController {
         
         // Present the scene.
         skView.presentScene(scene)
+        
+        backgroundMusic?.play()
         
         beginGame()
     }
