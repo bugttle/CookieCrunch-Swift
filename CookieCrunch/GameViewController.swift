@@ -20,6 +20,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var movesLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var gameOverPanel: UIImageView!
+    @IBOutlet weak var shuffleButton: UIButton!
     
     var tapGestureRecognizer: UITapGestureRecognizer!
     
@@ -72,7 +73,9 @@ class GameViewController: UIViewController {
         
         level.resetComboMultiplier()
         
-        scene.animateBeginGame() {}
+        scene.animateBeginGame() {
+            self.shuffleButton.isHidden = false
+        }
         
         shuffle()
     }
@@ -148,6 +151,7 @@ class GameViewController: UIViewController {
     
     func showGameOver() {
         gameOverPanel.isHidden = false
+        shuffleButton.isHidden = true
         scene.isUserInteractionEnabled = false
         
         scene.animateGameOver() {
@@ -164,5 +168,10 @@ class GameViewController: UIViewController {
         scene.isUserInteractionEnabled = true
         
         beginGame()
+    }
+    
+    @IBAction func shuffleButtonPressed(_: AnyObject) {
+        shuffle()
+        decrementMoves()
     }
 }

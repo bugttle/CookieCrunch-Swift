@@ -87,11 +87,28 @@
                                     <constraint firstAttribute="height" constant="225" id="UFK-bM-pCQ"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCZ-34-9HR">
+                                <rect key="frame" x="110" y="512" width="100" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="06U-uE-hbl"/>
+                                    <constraint firstAttribute="width" constant="100" id="aXy-rM-Pow"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="20"/>
+                                <state key="normal" title="Shuffle" backgroundImage="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shuffleButtonPressedWithSender:" destination="LVB-YS-i5n" eventType="touchUpInside" id="35C-HA-ISE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="b3d-qh-BLL" firstAttribute="top" secondItem="OCZ-34-9HR" secondAttribute="bottom" constant="20" id="Cuu-ol-rcr"/>
                             <constraint firstItem="uaj-aa-81i" firstAttribute="centerX" secondItem="bdc-N1-crn" secondAttribute="centerX" id="HKQ-2b-koa"/>
                             <constraint firstItem="2BQ-3a-hG9" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="20" id="HXe-54-SoZ"/>
+                            <constraint firstItem="OCZ-34-9HR" firstAttribute="centerX" secondItem="bdc-N1-crn" secondAttribute="centerX" id="Qag-qa-IP3"/>
                             <constraint firstItem="uaj-aa-81i" firstAttribute="leading" secondItem="bdc-N1-crn" secondAttribute="leading" id="TGp-pg-FpC"/>
                             <constraint firstItem="2BQ-3a-hG9" firstAttribute="leading" secondItem="bdc-N1-crn" secondAttribute="leading" constant="8" id="dEv-AT-HM6"/>
                             <constraint firstAttribute="trailing" secondItem="2BQ-3a-hG9" secondAttribute="trailing" constant="8" id="jD7-0g-PGa"/>
@@ -102,6 +119,7 @@
                         <outlet property="gameOverPanel" destination="uaj-aa-81i" id="ogA-OS-L6s"/>
                         <outlet property="movesLabel" destination="tUU-au-Wy1" id="eYK-nE-pZC"/>
                         <outlet property="scoreLabel" destination="GNK-yx-mJr" id="GlT-r4-ac3"/>
+                        <outlet property="shuffleButton" destination="OCZ-34-9HR" id="WPz-2O-aMm"/>
                         <outlet property="targetLabel" destination="dpz-cS-nUI" id="16u-zG-IPQ"/>
                     </connections>
                 </viewController>
@@ -109,4 +127,7 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="Button" width="100" height="36"/>
+    </resources>
 </document>
